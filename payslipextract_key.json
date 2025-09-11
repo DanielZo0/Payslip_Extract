@@ -1,0 +1,14 @@
+[
+  {
+    "PE Number": "pe_extract",
+    "Employee Name": "extract_nameandsurname",
+    "ID Card Number": "id_extract",
+    "Designation": "designation",
+    "Net": "extract_net",
+    "Gross": "extract_gross",
+    "FSS Main": "extract_fss_main",
+    "FSS Other": "extract_fss_main",
+    "FSS OT": "extract_fss_main",
+    "NI": "extract_ni"
+  }
+]
