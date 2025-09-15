@@ -31,36 +31,36 @@ def extract_data_from_pdf(pdf_path):
         # Extract data based on patterns
         patterns = {
             'pe_extract': r'PE\s*No\.\s*(\d+)',
+            'extract_period_from': r'From:\s*([0-9/]+)',
+            'extract_period_to': r'To:\s*([0-9/]+)',
             'extract_nameandsurname': r'Limited - PE No\. \d+\n([A-Za-z\s]+?)(?:\n|$)',
             'id_extract': r'ID\s*Card:\s*([A-Z0-9]+)',
             'designation': r'Designation:\s*([^\n]+)',
-            'extract_net': r'Gross:.*?Net:\s*([\d,.]+)',
-            'extract_gross': r'Gross:\s*([\d,.]+).*?Net:',
-            'extract_fss_main': r'Basic Pay.*?(?:\n|$)',
-            'extract_fss_other': r'Basic Pay.*?(?:\n|$)',
-            'extract_fss_ot': r'Tax On Overtime @ \d+%\s+-(\d+\.\d+)',
-            'extract_ni': r'NI\s+\d+\.\d+\s+-(\d+\.\d+)',
+            'extract_net': r'Net:\s*([\-\d,.]+)',
+            'extract_gross': r'Gross:\s*([\-\d,.]+)',
+            'extract_commissions': r'Commissions\s*([\-\d,.]+)',
+            'extract_gov_bonus': r'Government Bonus\s*([\-\d,.]+)',
+            'extract_fss_main': r'FSS Main\s*([\-\d,.]+)',
+            'extract_ot_15': r'Tax On Overtime @ 15%:?\s*([\-\d,.]+)',
+            'extract_ot_2': r'Overtime 2 @ 15%\s*\d*[.,]?\d*\s*([\-\d,.]+)',
+            'extract_ni': r'NI\s*\d*[.,]?\d*\s*([\-\d,.]+)',
         }
         
         # Extract each field using the patterns
+        # For fields that may appear multiple times, get the last match
+        last_match_fields = ["extract_gross", "extract_net", "extract_ot_15", "extract_ot_2", "extract_ni", "extract_fss_main", "extract_commissions", "extract_gov_bonus"]
         for json_key, pattern_key in extraction_keys.items():
             if pattern_key in patterns:
-                if pattern_key in ['extract_fss_main', 'extract_fss_other']:
-                    # FSS Main and Other are 0 when not explicitly shown
-                    extracted_data[json_key] = "0.00"
-                elif pattern_key == 'extract_fss_ot':
-                    # FSS OT is the Tax on Overtime value
-                    match = re.search(patterns[pattern_key], text, re.IGNORECASE)
-                    if match:
-                        extracted_data[json_key] = match.group(1).strip()
-                    else:
-                        extracted_data[json_key] = "46.00"  # Default value from Tax on Overtime
+                value = "Not found"
+                if pattern_key in last_match_fields:
+                    matches = re.findall(patterns[pattern_key], text, re.IGNORECASE)
+                    if matches:
+                        value = matches[-1].strip()
                 else:
                     match = re.search(patterns[pattern_key], text, re.IGNORECASE)
                     if match:
-                        extracted_data[json_key] = match.group(1).strip()
-                    else:
-                        extracted_data[json_key] = "Not found"
+                        value = match.group(1).strip()
+                extracted_data[json_key] = value
     
     return extracted_data
 

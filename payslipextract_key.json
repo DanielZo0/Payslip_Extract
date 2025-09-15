@@ -1,14 +1,18 @@
 [
   {
     "PE Number": "pe_extract",
+    "Period From": "extract_period_from",
+    "Period To": "extract_period_to",
     "Employee Name": "extract_nameandsurname",
     "ID Card Number": "id_extract",
     "Designation": "designation",
     "Net": "extract_net",
     "Gross": "extract_gross",
+    "Commissions": "extract_commissions",
+    "Government Bonus": "extract_gov_bonus",
     "FSS Main": "extract_fss_main",
-    "FSS Other": "extract_fss_main",
-    "FSS OT": "extract_fss_main",
+    "Tax On Overtime @ 15%": "extract_ot_15",
+    "Overtime 2 @ 15%": "extract_ot_2",
     "NI": "extract_ni"
   }
 ]
