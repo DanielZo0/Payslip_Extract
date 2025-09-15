@@ -65,33 +65,33 @@ def extract_data_from_pdf(pdf_path):
     return extracted_data
 
 def main():
-    # Get all PDF files from the Prerequisites directory
-    pdf_dir = Path(".")
-    pdf_files = list(pdf_dir.glob("*.pdf"))
-    
+    # Change working directory to 'input' and recursively find all PDF files
+    input_dir = Path("input")
+    pdf_files = list(input_dir.rglob("*.pdf"))
+
     if not pdf_files:
-        print("No PDF files found in the current directory")
+        print("No PDF files found in the input directory or its subfolders.")
         return
-    
+
     # Process each PDF file
     for pdf_file in pdf_files:
-        print(f"\nProcessing: {pdf_file.name}")
+        print(f"\nProcessing: {pdf_file}")
         try:
             extracted_data = extract_data_from_pdf(pdf_file)
-            
+
             # Create output directory if it doesn't exist
             output_dir = Path("output")
             output_dir.mkdir(exist_ok=True)
-            
+
             # Save extracted data to JSON file
             output_file = output_dir / f"{pdf_file.stem}_extracted.json"
             with open(output_file, 'w') as f:
                 json.dump(extracted_data, f, indent=4)
-            
+
             print(f"Data extracted successfully. Output saved to: {output_file}")
-            
+
         except Exception as e:
-            print(f"Error processing {pdf_file.name}: {str(e)}")
+            print(f"Error processing {pdf_file}: {str(e)}")
 
 if __name__ == "__main__":
     main()
