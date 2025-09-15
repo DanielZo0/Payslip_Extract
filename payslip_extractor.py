@@ -43,12 +43,13 @@ def extract_data_from_pdf(pdf_path):
             'extract_fss_main': r'FSS Main\s*([\-\d,.]+)',
             'extract_ot_15': r'Tax On Overtime @ 15%:?\s*([\-\d,.]+)',
             'extract_ot_2': r'Overtime 2 @ 15%\s*\d*[.,]?\d*\s*([\-\d,.]+)',
+            'extract_ot15_15': r'Overtime 1\.5 @ 15%:?\s*([\-\d,.]+)',
             'extract_ni': r'NI\s*\d*[.,]?\d*\s*([\-\d,.]+)',
         }
         
         # Extract each field using the patterns
         # For fields that may appear multiple times, get the last match
-        last_match_fields = ["extract_gross", "extract_net", "extract_ot_15", "extract_ot_2", "extract_ni", "extract_fss_main", "extract_commissions", "extract_gov_bonus"]
+        last_match_fields = ["extract_gross", "extract_net", "extract_ot_15", "extract_ot_2", "extract_ot15_15", "extract_ni", "extract_fss_main", "extract_commissions", "extract_gov_bonus"]
         for json_key, pattern_key in extraction_keys.items():
             if pattern_key in patterns:
                 value = "Not found"
