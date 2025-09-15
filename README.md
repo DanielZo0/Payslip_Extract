@@ -1,10 +1,25 @@
 # Payslip Extractor
 
+
 This project extracts structured data from payslip PDF files and outputs the results as JSON files.
 
 ## Features
 - Batch processing of multiple payslip PDFs
-- Extracts key fields such as PE Number, Employee Name, ID Card, Designation, Net, Gross, Commissions, Government Bonus, FSS Main, Tax On Overtime, Overtime, NI, and more
+- Recursively scans the `input/` folder and all subfolders for PDF files
+- Extracts key fields such as:
+  - PE Number
+  - Period From / To
+  - Employee Name
+  - ID Card Number
+  - Designation
+  - Net / Gross
+  - Commissions
+  - Government Bonus
+  - FSS Main
+  - Tax On Overtime @ 15%
+  - Overtime 2 @ 15%
+  - Overtime 1.5 @ 15% (selects the largest value if multiple are present)
+  - NI
 - Outputs results to the `output/` directory
 
 ## Requirements
@@ -21,7 +36,7 @@ This project extracts structured data from payslip PDF files and outputs the res
    ```sh
    pip install -r requirements.txt
    ```
-3. Place your payslip PDF files in the project root directory.
+3. Place your payslip PDF files in the `input/` folder (or any subfolder).
 
 ## Usage
 Run the extractor script:
