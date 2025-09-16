@@ -13,6 +13,7 @@
     "FSS Main": "extract_fss_main",
     "Tax On Overtime @ 15%": "extract_ot_15",
     "Overtime 2 @ 15%": "extract_ot_2",
+    "Overtime 1.5 @ 15%": "extract_ot15_15",
     "NI": "extract_ni"
   }
 ]
