@@ -6,6 +6,7 @@
     "Employee Name": "extract_nameandsurname",
     "ID Card Number": "id_extract",
     "Designation": "designation",
+    "Monthly Basic Gross Salary": "extract_monthly_basic_gross_salary",
     "Tax": "extract_tax",
     "Net": "extract_net",
     "Gross": "extract_gross",

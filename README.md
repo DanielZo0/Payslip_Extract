@@ -40,11 +40,6 @@ This project extracts structured data from payslip PDF files and outputs the res
 ## Multi-Format Extraction
 This script automatically detects and extracts data from both original and alternate payslip formats (e.g., files in `input/4C's/`). The output JSON structure remains consistent regardless of input format.
 
-## Testing
-Unit tests are provided in `test_payslip_extractor.py` to verify extraction for both formats. Run tests with:
-```sh
-python -m unittest test_payslip_extractor.py
-```
 3. Place your payslip PDF files in the `input/` folder (or any subfolder).
 
 ## Usage
